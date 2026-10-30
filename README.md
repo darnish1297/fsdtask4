@@ -1,44 +1,84 @@
-# MERN
+# 🎓 Student Internship Portal
 
-This is a simple NodeJS + Express + React + MongoDB application. This application serves as a basic template for a mern applications.
+A full-stack MERN application for browsing internships and submitting applications.
 
-What does this application do?
--------------------------------
-This application serves a simple MERN based TODO application to demonstrate the use of MERN stack. This application uses following technologies:
-- MongoDB: used as database
-- Express: used as web application framework
-- React: used as frontend framework to build UI
-- NodeJS: used as backend server
+## Tech Stack
 
+- **Frontend:** React 18, React Router v6, Vite
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB with Mongoose ODM
+- **Styling:** Custom CSS (no external UI library)
 
-## How to run
+## Features
 
-Before running the application, make sure all dependencies are installed. 
+- 📋 Browse available internships
+- 🔍 View detailed internship information
+- 📝 Apply with validated application form (name, email, roll number, internship)
+- ✅ Client-side and server-side input validation
+- 🔄 fetch() API for form submission
+- 📨 Success / error message display
+- 🛡️ Duplicate application detection
+- 🗂️ REST API with async/await and error handling
 
-1. Install server & client dependencies, run following command in terminal:
-   > `npm install; cd client && npm install && cd ..`
+## Project Structure
 
-2. Run following command to start both server and client:
-   > `npm run dev`
+```
+my-project/
+├── index.js                  # Express server entry point
+├── models/
+│   └── Application.js        # Mongoose schema for applications
+├── routes/
+│   └── api.js                # REST API endpoints
+├── client/
+│   ├── src/
+│   │   ├── App.jsx           # React Router setup
+│   │   ├── components/
+│   │   │   ├── InternshipList.jsx      # List all internships
+│   │   │   ├── InternshipDetails.jsx   # Single internship details
+│   │   │   └── ApplicationForm.jsx     # Application form with validation
+│   │   └── ...
+│   └── ...
+├── .env                      # Environment variables (MONGO_DB_URI)
+└── package.json
+```
 
-3. Refresh the URL in simple browser to see the output.
+## API Endpoints
 
+| Method | Endpoint              | Description                 |
+|--------|-----------------------|-----------------------------|
+| GET    | `/api/internships`    | Get all internships         |
+| GET    | `/api/internships/:id`| Get internship by ID        |
+| POST   | `/api/applications`   | Submit an application       |
+| GET    | `/api/applications`   | Get all submitted applications |
 
+## Environment Variables
 
-## FAQs & Debugging
+| Variable       | Description              |
+|----------------|--------------------------|
+| `MONGO_DB_URI` | MongoDB connection string|
+| `PORT`         | Server port (default 5000)|
+| `VITE_API_URL` | Backend API URL (for deployed frontend) |
 
-### 1. Node server failing to connect to Database
+## Local Development
 
-   Ensure Mongo_DB_URI is set in .env file. If not, create a new file named `.env` in root directory and add following line:
-   > `MONGO_DB_URI=<YOUR_MONGO_DB_URI>`
+```bash
+# Install dependencies
+npm run setup
 
-   Once the studio is connected to your workspace, `MONGO_DB_URI` should be automatically set in your `.env` file.
+# Run both frontend and backend
+npm run dev
+```
 
-   Alternatively, you can create `MONGO_DB_URI` using value present in the file **.vscode/.studio/studio-env.json**.
-   MONGO_DB_URI typically looks like this:
-> `mongodb://<USERNAME>:<PASSWORD>@<HOST>:<PORT>/<DATABASE_NAME>`
+## Deployment
 
-### 2. Can I start server and client separately?   
-   `npm run dev` starts both server and client. If you want to start them separately, you can use following commands:
-   - `npm run server`: to start server
-   - `npm run client`: to start client
+- **Frontend:** Deploy the `client/` folder to Vercel. Set `VITE_API_URL` env variable to your backend URL.
+- **Backend:** Deploy to Render / Railway / Cyclic. Set `MONGO_DB_URI` env variable.
+
+## Git Workflow
+
+```bash
+git checkout -b rollno_v1
+git add -A && git commit -m "feat: Student Internship Portal"
+git checkout main && git merge rollno_v1
+git push origin main
+```
